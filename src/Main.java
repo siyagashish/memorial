@@ -2,9 +2,8 @@ import java.sql.*;
 import java.util.*;
 
 public class Main {
-	static Sql sql = new Sql("soldiers");
 
-	static int node_no(String name) {
+	static int node_no(String name, Sql sql) {
 
 		int node_no = 0;
 		try {
@@ -31,21 +30,23 @@ public class Main {
 		return node_no;
 	}
 
-	
 	public static void main(String[] args) {
 
 		Graph g = new Graph();
+		Sql sql = new Sql("soldiers");
+		excel_to_sql.convert("/Users/siyagashish/Desktop/Book1.xlsx", sql);
+
 		Scanner s = new Scanner(System.in);
-		int temp =0;
-		
+		int temp = 0;
+
 		while (true) {
 			System.out.println("Enter Name :");
 
-			int temp1 = Main.node_no(s.next());
+			int temp1 = Main.node_no(s.next(), sql);
 			g.shortest_path(temp, temp1);
 
 			System.out.println("0 to terminate 1 to continue");
-			if(s.nextInt()==0) {
+			if (s.nextInt() == 0) {
 				break;
 			}
 			temp = temp1;
